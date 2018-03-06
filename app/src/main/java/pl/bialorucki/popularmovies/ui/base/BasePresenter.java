@@ -6,7 +6,7 @@ package pl.bialorucki.popularmovies.ui.base;
 
 public abstract class BasePresenter<V extends MvpView> implements MvpPresenter<V> {
 
-    V view;
+    public V view;
 
     @Override
     public void attachView(V view) {
