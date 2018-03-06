@@ -1,5 +1,6 @@
 package pl.bialorucki.popularmovies.ui.mainScreen;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -24,6 +25,7 @@ import pl.bialorucki.popularmovies.R;
 import pl.bialorucki.popularmovies.model.Movie;
 import pl.bialorucki.popularmovies.service.GetMoviesTask;
 import pl.bialorucki.popularmovies.service.MovieRetrofitService;
+import pl.bialorucki.popularmovies.ui.detailScreen.DetailActivity;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -49,6 +51,9 @@ public class MainActivity extends AppCompatActivity implements MainScreenContrac
         MainScreenContract.Presenter<MainScreenContract.View> presenter = new MainPresenter();
         presenter.attachView(this);
         presenter.loadMovies();
+
+        Intent intent = new Intent(this, DetailActivity.class);
+        startActivity(intent);
 
     }
 
