@@ -1,6 +1,8 @@
 package pl.bialorucki.popularmovies.ui.mainScreen;
 
 import android.content.Context;
+import android.content.Intent;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,8 +16,10 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import pl.bialorucki.popularmovies.R;
 import pl.bialorucki.popularmovies.model.Movie;
+import pl.bialorucki.popularmovies.ui.detailScreen.DetailActivity;
 
 /**
  * Created by Maciej Bialorucki on 06.03.18.
@@ -46,9 +50,14 @@ class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder holder, int position) {
         Movie movie = movies.get(position);
         holder.movieTitle.setText(movie.getTitle());
-
+        holder.movieCard.setOnClickListener(view -> {
+            Intent intent = new Intent(holder.moviewPoster.getContext(), DetailActivity.class);
+            intent.putExtra("movie",movie);
+            holder.moviewPoster.getContext().startActivity(intent);
+        });
         Picasso.with(holder.moviewPoster.getContext())
-                .load(BASE_PATH + movies.get(position).getPoster_path()).into(holder.moviewPoster);
+                .load(BASE_PATH + movies.get(position).getPoster_path())
+                .into(holder.moviewPoster);
 
     }
 
@@ -58,16 +67,20 @@ class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder> {
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public ViewHolder(View itemView) {
-            super(itemView);
-            ButterKnife.bind(this,itemView);
-        }
 
         @BindView(R.id.title_tv)
         TextView movieTitle;
 
         @BindView(R.id.poster_iv)
         ImageView moviewPoster;
+
+        @BindView(R.id.movie_cv)
+        CardView movieCard;
+
+        public ViewHolder(View itemView) {
+            super(itemView);
+            ButterKnife.bind(this,itemView);
+        }
 
 
     }

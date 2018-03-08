@@ -1,43 +1,32 @@
 package pl.bialorucki.popularmovies.ui.mainScreen;
 
-import android.content.Intent;
-import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 
-import com.google.gson.GsonBuilder;
-
-import java.io.IOException;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import pl.bialorucki.popularmovies.BuildConfig;
 import pl.bialorucki.popularmovies.R;
 import pl.bialorucki.popularmovies.model.Movie;
-import pl.bialorucki.popularmovies.service.GetMoviesTask;
-import pl.bialorucki.popularmovies.service.MovieRetrofitService;
-import pl.bialorucki.popularmovies.ui.detailScreen.DetailActivity;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
-public class MainActivity extends AppCompatActivity implements MainScreenContract.View{
+public class MainActivity extends AppCompatActivity implements MainScreenContract.View {
 
 
     @BindView(R.id.mainGrid_rv)
     RecyclerView mainGrid;
-    private MoviesAdapter gridAdapter;
-
     @BindView(R.id.mainProgressBar_pb)
     ProgressBar mainProgressBar;
+    private MoviesAdapter gridAdapter;
+    private MainScreenContract.Presenter<MainScreenContract.View> presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,17 +37,35 @@ public class MainActivity extends AppCompatActivity implements MainScreenContrac
 
         configureRecycleView();
 
-        MainScreenContract.Presenter<MainScreenContract.View> presenter = new MainPresenter();
+        presenter = new MainPresenter();
         presenter.attachView(this);
-        presenter.loadMovies();
-
-//        Intent intent = new Intent(this, DetailActivity.class);
-//        startActivity(intent);
+        presenter.loadMostPopularMovies();
 
     }
 
-    private void configureRecycleView(){
-        mainGrid.setLayoutManager(new GridLayoutManager(this,2));
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.show_most_popular:
+                presenter.loadMostPopularMovies();
+                return true;
+            case R.id.show_highest_rated:
+                presenter.loadHighestRatedMovies();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void configureRecycleView() {
+        mainGrid.setLayoutManager(new GridLayoutManager(this, 2));
         gridAdapter = new MoviesAdapter(Collections.EMPTY_LIST);
         mainGrid.setAdapter(gridAdapter);
     }
