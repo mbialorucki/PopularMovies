@@ -1,4 +1,4 @@
-package pl.bialorucki.popularmovies.service;
+package pl.bialorucki.popularmovies.service.tasks;
 
 import android.os.AsyncTask;
 import android.util.Log;
@@ -17,12 +17,17 @@ import pl.bialorucki.popularmovies.service.retrofit.RetrofitHelper;
  * Created by Maciej Bialorucki on 06.03.18.
  */
 
-public class GetPopularMoviesTask extends AsyncTask<Void, Void, List<Movie>> {
+class GetPopularMoviesTask extends AsyncTask<Void, Void, List<Movie>> {
 
+    private static final String TAG = "GetPopularMoviesTask";
 
     private MovieRetrofitService moviesService;
 
     public GetPopularMoviesTask(MovieRetrofitService moviesService) {
+        this.moviesService = moviesService;
+    }
+
+    public void setMoviesService(MovieRetrofitService moviesService) {
         this.moviesService = moviesService;
     }
 
@@ -31,10 +36,9 @@ public class GetPopularMoviesTask extends AsyncTask<Void, Void, List<Movie>> {
 
         try {
             MoviesList movies = moviesService.getMoviesByPopularity(BuildConfig.API_KEY).execute().body();
-            Log.d("Movies", String.valueOf(movies.getMovies()));
             return movies.getMovies();
         } catch (IOException e) {
-            e.printStackTrace();
+            Log.d(TAG,e.toString());
         }
         return Collections.emptyList();
     }
