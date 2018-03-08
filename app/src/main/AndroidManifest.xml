@@ -23,7 +23,7 @@
             android:parentActivityName=".ui.mainScreen.MainActivity"
             android:name=".ui.detailScreen.DetailActivity"
             android:label="@string/title_activity_detail"
-            android:theme="@style/AppThemegit s">
+            android:theme="@style/AppTheme">
         </activity>
     </application>
 

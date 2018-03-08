@@ -52,8 +52,8 @@ public class MainActivity extends AppCompatActivity implements MainScreenContrac
         presenter.attachView(this);
         presenter.loadMovies();
 
-        Intent intent = new Intent(this, DetailActivity.class);
-        startActivity(intent);
+//        Intent intent = new Intent(this, DetailActivity.class);
+//        startActivity(intent);
 
     }
 
