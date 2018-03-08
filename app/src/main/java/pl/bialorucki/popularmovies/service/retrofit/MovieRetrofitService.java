@@ -1,4 +1,4 @@
-package pl.bialorucki.popularmovies.service;
+package pl.bialorucki.popularmovies.service.retrofit;
 
 import pl.bialorucki.popularmovies.model.*;
 import java.util.List;
