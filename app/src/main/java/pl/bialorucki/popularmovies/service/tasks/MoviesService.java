@@ -7,7 +7,13 @@ import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
+import io.reactivex.Observable;
+import io.reactivex.Scheduler;
+import io.reactivex.schedulers.Schedulers;
 import pl.bialorucki.popularmovies.model.Movie;
+import pl.bialorucki.popularmovies.model.MoviesList;
+import pl.bialorucki.popularmovies.service.retrofit.MovieRetrofitService;
+import pl.bialorucki.popularmovies.service.retrofit.RetrofitHelper;
 import pl.bialorucki.popularmovies.ui.mainScreen.MainScreenContract;
 
 
@@ -26,6 +32,8 @@ public class MoviesService {
     }
 
     private List<Movie> getMovies(String sortingKey) {
+
+
         try {
             AsyncTask<Void, Void, List<Movie>> task = MoviesTaskFactory.getTask(sortingKey);
             return task.execute().get();

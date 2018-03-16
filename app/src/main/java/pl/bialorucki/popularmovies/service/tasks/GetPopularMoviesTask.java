@@ -33,13 +33,6 @@ class GetPopularMoviesTask extends AsyncTask<Void, Void, List<Movie>> {
 
     @Override
     protected List<Movie> doInBackground(Void... voids) {
-
-        try {
-            MoviesList movies = moviesService.getMoviesByPopularity(BuildConfig.API_KEY).execute().body();
-            return movies.getMovies();
-        } catch (IOException e) {
-            Log.d(TAG,e.toString());
-        }
-        return Collections.emptyList();
+            return moviesService.getMoviesByPopularity(BuildConfig.API_KEY).blockingFirst().getMovies();
     }
 }

@@ -1,5 +1,6 @@
 package pl.bialorucki.popularmovies.service.retrofit;
 
+import io.reactivex.Observable;
 import pl.bialorucki.popularmovies.model.*;
 import java.util.List;
 
@@ -16,7 +17,7 @@ import retrofit2.http.Query;
 public interface MovieRetrofitService {
 
     @GET("movie/popular")
-    Call<MoviesList> getMoviesByPopularity(@Query("api_key") String apiKey);
+    Observable<MoviesList> getMoviesByPopularity(@Query("api_key") String apiKey);
     @GET("movie/top_rated")
-    Call<MoviesList> getMoviesByRating(@Query("api_key") String apiKey);
+    Observable<MoviesList> getMoviesByRating(@Query("api_key") String apiKey);
 }

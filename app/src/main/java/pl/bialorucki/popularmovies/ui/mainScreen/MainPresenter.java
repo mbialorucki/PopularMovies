@@ -1,5 +1,11 @@
 package pl.bialorucki.popularmovies.ui.mainScreen;
 
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
+import pl.bialorucki.popularmovies.BuildConfig;
+import pl.bialorucki.popularmovies.model.MoviesList;
+import pl.bialorucki.popularmovies.service.retrofit.RetrofitHelper;
 import pl.bialorucki.popularmovies.service.tasks.MoviesService;
 import pl.bialorucki.popularmovies.ui.base.BasePresenter;
 
@@ -22,15 +28,23 @@ class MainPresenter extends BasePresenter<MainScreenContract.View> implements Ma
     @Override
     public void loadMostPopularMovies() {
         view.showLoadingIndicator();
-        view.showMovies(moviesService.getMostPopularMovies());
-        view.hideLoadingIndicator();
+        Observable<MoviesList> moviesByPopularity = RetrofitHelper.createRetrofitMoviesClient().getMoviesByPopularity(BuildConfig.API_KEY);
+
+        moviesByPopularity.subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnComplete(() -> view.hideLoadingIndicator())
+                .subscribe(moviesList -> view.showMovies(moviesList.getMovies()));
     }
 
     @Override
     public void loadHighestRatedMovies() {
         view.showLoadingIndicator();
-        view.showMovies(moviesService.getHighestRatedMovies());
-        view.hideLoadingIndicator();
+        Observable<MoviesList> moviesByRating = RetrofitHelper.createRetrofitMoviesClient().getMoviesByRating(BuildConfig.API_KEY);
+
+        moviesByRating.subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnComplete(() -> view.hideLoadingIndicator())
+                .subscribe(moviesList -> view.showMovies(moviesList.getMovies()));
     }
 
 }
