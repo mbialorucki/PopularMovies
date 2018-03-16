@@ -21,6 +21,8 @@ import pl.bialorucki.popularmovies.R;
 import pl.bialorucki.popularmovies.Utils;
 import pl.bialorucki.popularmovies.model.Movie;
 import pl.bialorucki.popularmovies.ui.detailScreen.DetailActivity;
+import pl.bialorucki.popularmovies.ui.helper.ImageLoader;
+import pl.bialorucki.popularmovies.ui.helper.PicassoImageLoader;
 
 /**
  * Created by Maciej Bialorucki on 06.03.18.
@@ -29,10 +31,11 @@ import pl.bialorucki.popularmovies.ui.detailScreen.DetailActivity;
 class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder> {
 
     private List<Movie> movies;
-
+    private ImageLoader imageLoader;
 
     public MoviesAdapter(List<Movie> movies) {
         this.movies = movies;
+        imageLoader = new PicassoImageLoader();
     }
 
     public void setMovies(List<Movie> movies) {
@@ -56,9 +59,8 @@ class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder> {
             intent.putExtra("movie",movie);
             holder.moviewPoster.getContext().startActivity(intent);
         });
-        Picasso.with(holder.moviewPoster.getContext())
-                .load(Utils.BASE_PATH + movies.get(position).getPoster_path())
-                .into(holder.moviewPoster);
+
+        imageLoader.loadImage(holder.moviewPoster.getContext(),Utils.BASE_PATH + movies.get(position).getPoster_path(),holder.moviewPoster);
 
     }
 

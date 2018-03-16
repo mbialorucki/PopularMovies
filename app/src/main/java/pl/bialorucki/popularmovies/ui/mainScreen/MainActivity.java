@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.ProgressBar;
 
 import java.util.Collections;
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements MainScreenContrac
     RecyclerView mainGrid;
     @BindView(R.id.mainProgressBar_pb)
     ProgressBar mainProgressBar;
+
     private MoviesAdapter gridAdapter;
     private MainScreenContract.Presenter<MainScreenContract.View> presenter;
     private String sortingStrategy;
@@ -50,6 +52,7 @@ public class MainActivity extends AppCompatActivity implements MainScreenContrac
         presenter = new MainPresenter();
         presenter.attachView(this);
         presenter.loadMostPopularMovies();
+
 
     }
 

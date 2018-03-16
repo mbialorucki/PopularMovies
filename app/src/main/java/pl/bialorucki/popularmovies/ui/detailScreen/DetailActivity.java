@@ -15,6 +15,8 @@ import butterknife.ButterKnife;
 import pl.bialorucki.popularmovies.R;
 import pl.bialorucki.popularmovies.Utils;
 import pl.bialorucki.popularmovies.model.Movie;
+import pl.bialorucki.popularmovies.ui.helper.ImageLoader;
+import pl.bialorucki.popularmovies.ui.helper.PicassoImageLoader;
 
 public class DetailActivity extends AppCompatActivity implements DetailScreenContract.View{
 
@@ -39,6 +41,7 @@ public class DetailActivity extends AppCompatActivity implements DetailScreenCon
 
     private Movie movieToDisplay;
     private DetailScreenContract.Presenter<DetailScreenContract.View> presenter;
+    private ImageLoader imageLoader;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,21 +52,19 @@ public class DetailActivity extends AppCompatActivity implements DetailScreenCon
         presenter = new DetailsPresenter();
         presenter.attachView(this);
 
+        imageLoader = new PicassoImageLoader();
+
         if (getIntent().getExtras() != null) {
             movieToDisplay = getIntent().getExtras().getParcelable("movie");
-            presenter.loadMovieDetails(null);
+            presenter.loadMovieDetails(movieToDisplay);
         }
     }
 
     @Override
     public void showMovieDetails(Movie movieToDisplay) {
-        Picasso.with(this)
-                .load(Utils.BASE_PATH_BACKDROP + movieToDisplay.getBackdrop_path())
-                .into(header);
 
-        Picasso.with(this)
-                .load(Utils.BASE_PATH + movieToDisplay.getPoster_path())
-                .into(coverImage);
+        imageLoader.loadImage(this,Utils.BASE_PATH_BACKDROP + movieToDisplay.getBackdrop_path(),header);
+        imageLoader.loadImage(this,Utils.BASE_PATH + movieToDisplay.getPoster_path(),coverImage);
 
         title.setText(movieToDisplay.getTitle());
         description.setText(movieToDisplay.getOverview());
