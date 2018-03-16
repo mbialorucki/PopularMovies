@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import pl.bialorucki.popularmovies.model.Movie;
+import pl.bialorucki.popularmovies.ui.mainScreen.MainScreenContract;
 
 
 /**
@@ -27,7 +28,7 @@ public class MoviesService {
     private List<Movie> getMovies(String sortingKey) {
         try {
             AsyncTask<Void, Void, List<Movie>> task = MoviesTaskFactory.getTask(sortingKey);
-            return task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR).get();
+            return task.execute().get();
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
@@ -35,4 +36,5 @@ public class MoviesService {
         }
         return Collections.emptyList();
     }
+
 }
