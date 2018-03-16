@@ -4,4 +4,7 @@
     <string name="title_activity_detail">Movie details</string>
     <string name="most_popular_menu_item">Show most popular</string>
     <string name="highest_rated">Show highest rated</string>
+    <string name="overview">Overview</string>
+    <string name="release_date">Release date :</string>
+    <string name="movie_load_error">Cannot load movie details. Try again.</string>
 </resources>

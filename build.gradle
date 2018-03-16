@@ -1,7 +1,12 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    
+
+    ext{
+        supportLibVersion='26.1.0'
+        butterKnifeVersion='8.8.1'
+    }
+
     repositories {
         google()
         jcenter()

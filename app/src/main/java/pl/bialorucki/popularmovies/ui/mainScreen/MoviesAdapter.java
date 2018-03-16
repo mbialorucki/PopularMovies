@@ -18,6 +18,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import pl.bialorucki.popularmovies.R;
+import pl.bialorucki.popularmovies.Utils;
 import pl.bialorucki.popularmovies.model.Movie;
 import pl.bialorucki.popularmovies.ui.detailScreen.DetailActivity;
 
@@ -28,7 +29,7 @@ import pl.bialorucki.popularmovies.ui.detailScreen.DetailActivity;
 class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder> {
 
     private List<Movie> movies;
-    private static final String BASE_PATH = "http://image.tmdb.org/t/p/w185/"; //base path for movies covers
+
 
     public MoviesAdapter(List<Movie> movies) {
         this.movies = movies;
@@ -56,7 +57,7 @@ class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder> {
             holder.moviewPoster.getContext().startActivity(intent);
         });
         Picasso.with(holder.moviewPoster.getContext())
-                .load(BASE_PATH + movies.get(position).getPoster_path())
+                .load(Utils.BASE_PATH + movies.get(position).getPoster_path())
                 .into(holder.moviewPoster);
 
     }
