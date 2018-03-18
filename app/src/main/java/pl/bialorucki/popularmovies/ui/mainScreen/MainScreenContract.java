@@ -25,5 +25,6 @@ public interface MainScreenContract {
 
         void loadMostPopularMovies();
         void loadHighestRatedMovies();
+        void loadLastSelectedMovies(String sortingType);
     }
 }

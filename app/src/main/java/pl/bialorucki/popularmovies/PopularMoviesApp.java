@@ -12,7 +12,5 @@ public class PopularMoviesApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-
-        //Stetho.initializeWithDefaults(this);
     }
 }

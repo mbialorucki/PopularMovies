@@ -1,7 +1,6 @@
 package pl.bialorucki.popularmovies.ui.mainScreen;
 
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,14 +16,11 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import pl.bialorucki.popularmovies.R;
+import pl.bialorucki.popularmovies.Utils;
 import pl.bialorucki.popularmovies.model.Movie;
 
 public class MainActivity extends AppCompatActivity implements MainScreenContract.View {
 
-
-    public static final String MOST_POPULAR = "most_popular";
-    private static final String SORTING_STRATEGY = "sorting_strategy";
-    private static final String HIGHEST_RATED_STRATEGY = "highest_rated";
     @BindView(R.id.mainGrid_rv)
     RecyclerView mainGrid;
     @BindView(R.id.mainProgressBar_pb)
@@ -37,9 +33,9 @@ public class MainActivity extends AppCompatActivity implements MainScreenContrac
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        sortingStrategy = MOST_POPULAR;
+        sortingStrategy = Utils.MOST_POPULAR_STRATEGY;
         if (savedInstanceState != null) {
-            sortingStrategy = savedInstanceState.getString(SORTING_STRATEGY, MOST_POPULAR);
+            sortingStrategy = savedInstanceState.getString(Utils.SORTING_STRATEGY, Utils.MOST_POPULAR_STRATEGY);
         }
         setContentView(R.layout.activity_main);
 
@@ -51,12 +47,8 @@ public class MainActivity extends AppCompatActivity implements MainScreenContrac
         presenter.attachView(this);
 
         if(savedInstanceState != null){
-            String string = savedInstanceState.getString(SORTING_STRATEGY, MOST_POPULAR);
-            if(string.equals(MOST_POPULAR)) {
-                presenter.loadMostPopularMovies();
-            }else{
-                presenter.loadHighestRatedMovies();
-            }
+            String lastSortingStrategy = savedInstanceState.getString(Utils.SORTING_STRATEGY, Utils.MOST_POPULAR_STRATEGY);
+            presenter.loadLastSelectedMovies(lastSortingStrategy);
         }
 
         else{
@@ -67,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements MainScreenContrac
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
-        outState.putString(SORTING_STRATEGY, sortingStrategy);
+        outState.putString(Utils.SORTING_STRATEGY, sortingStrategy);
         super.onSaveInstanceState(outState);
     }
 
@@ -84,11 +76,11 @@ public class MainActivity extends AppCompatActivity implements MainScreenContrac
         switch (item.getItemId()) {
             case R.id.show_most_popular:
                 presenter.loadMostPopularMovies();
-                sortingStrategy = MOST_POPULAR;
+                sortingStrategy = Utils.MOST_POPULAR_STRATEGY;
                 return true;
             case R.id.show_highest_rated:
                 presenter.loadHighestRatedMovies();
-                sortingStrategy = HIGHEST_RATED_STRATEGY;
+                sortingStrategy = Utils.HIGHEST_RATED_STRATEGY;
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

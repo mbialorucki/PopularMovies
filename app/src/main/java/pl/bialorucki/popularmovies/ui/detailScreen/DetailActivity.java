@@ -20,6 +20,8 @@ import pl.bialorucki.popularmovies.ui.helper.PicassoImageLoader;
 
 public class DetailActivity extends AppCompatActivity implements DetailScreenContract.View{
 
+    private static final String MOVIE_KEY = "movie";
+
     @BindView(R.id.header_iv)
     ImageView header;
     @BindView(R.id.title)
@@ -42,6 +44,7 @@ public class DetailActivity extends AppCompatActivity implements DetailScreenCon
     private Movie movieToDisplay;
     private DetailScreenContract.Presenter<DetailScreenContract.View> presenter;
     private ImageLoader imageLoader;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,7 +58,7 @@ public class DetailActivity extends AppCompatActivity implements DetailScreenCon
         imageLoader = new PicassoImageLoader();
 
         if (getIntent().getExtras() != null) {
-            movieToDisplay = getIntent().getExtras().getParcelable("movie");
+            movieToDisplay = getIntent().getExtras().getParcelable(MOVIE_KEY);
             presenter.loadMovieDetails(movieToDisplay);
         }
     }
