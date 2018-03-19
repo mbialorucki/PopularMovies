@@ -19,6 +19,8 @@ public interface MainScreenContract {
         void showLoadingIndicator();
 
         void hideLoadingIndicator();
+
+        void showNoNetworkConnectionInfo();
     }
 
     interface Presenter<V extends MvpView> extends MvpPresenter<V> {
@@ -26,5 +28,6 @@ public interface MainScreenContract {
         void loadMostPopularMovies();
         void loadHighestRatedMovies();
         void loadLastSelectedMovies(String sortingType);
+        void checkInternetAccess(boolean internetAvailable);
     }
 }

@@ -1,6 +1,8 @@
 package pl.bialorucki.popularmovies.ui.mainScreen;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,9 +17,11 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import pl.bialorucki.popularmovies.AndroidUtils;
 import pl.bialorucki.popularmovies.R;
 import pl.bialorucki.popularmovies.Utils;
 import pl.bialorucki.popularmovies.model.Movie;
+import pl.bialorucki.popularmovies.ui.detailScreen.DetailActivity;
 
 public class MainActivity extends AppCompatActivity implements MainScreenContract.View {
 
@@ -29,6 +33,8 @@ public class MainActivity extends AppCompatActivity implements MainScreenContrac
     private MoviesAdapter gridAdapter;
     private MainScreenContract.Presenter<MainScreenContract.View> presenter;
     private String sortingStrategy;
+    private AndroidUtils androidUtils;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,19 +49,25 @@ public class MainActivity extends AppCompatActivity implements MainScreenContrac
 
         configureRecycleView();
 
+
         presenter = new MainPresenter();
         presenter.attachView(this);
 
-        if(savedInstanceState != null){
-            String lastSortingStrategy = savedInstanceState.getString(Utils.SORTING_STRATEGY, Utils.MOST_POPULAR_STRATEGY);
-            presenter.loadLastSelectedMovies(lastSortingStrategy);
-        }
+        androidUtils = new AndroidUtils(this);
+        boolean internetAvailable = androidUtils.isInternetAvailable();
+        presenter.checkInternetAccess(internetAvailable);
 
-        else{
-            presenter.loadMostPopularMovies();
+        if (internetAvailable) {
+            if (savedInstanceState != null) {
+                String lastSortingStrategy = savedInstanceState.getString(Utils.SORTING_STRATEGY, Utils.MOST_POPULAR_STRATEGY);
+                presenter.loadLastSelectedMovies(lastSortingStrategy);
+            } else {
+                presenter.loadMostPopularMovies();
+            }
         }
 
     }
+
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
@@ -75,12 +87,16 @@ public class MainActivity extends AppCompatActivity implements MainScreenContrac
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.show_most_popular:
-                presenter.loadMostPopularMovies();
-                sortingStrategy = Utils.MOST_POPULAR_STRATEGY;
+                if(androidUtils.isInternetAvailable()) {
+                    presenter.loadMostPopularMovies();
+                    sortingStrategy = Utils.MOST_POPULAR_STRATEGY;
+                }
                 return true;
             case R.id.show_highest_rated:
-                presenter.loadHighestRatedMovies();
-                sortingStrategy = Utils.HIGHEST_RATED_STRATEGY;
+                if(androidUtils.isInternetAvailable()) {
+                    presenter.loadHighestRatedMovies();
+                    sortingStrategy = Utils.HIGHEST_RATED_STRATEGY;
+                }
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -89,7 +105,11 @@ public class MainActivity extends AppCompatActivity implements MainScreenContrac
 
     private void configureRecycleView() {
         mainGrid.setLayoutManager(new GridLayoutManager(this, 2));
-        gridAdapter = new MoviesAdapter(Collections.EMPTY_LIST);
+        gridAdapter = new MoviesAdapter(Collections.EMPTY_LIST, movie -> {
+            Intent intent = new Intent(MainActivity.this, DetailActivity.class);
+            intent.putExtra("movie", movie);
+            startActivity(intent);
+        });
         mainGrid.setAdapter(gridAdapter);
     }
 
@@ -107,5 +127,11 @@ public class MainActivity extends AppCompatActivity implements MainScreenContrac
     @Override
     public void hideLoadingIndicator() {
         mainProgressBar.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showNoNetworkConnectionInfo() {
+        Snackbar.make(mainGrid, R.string.no_internet_connection, Snackbar.LENGTH_INDEFINITE).show();
+        hideLoadingIndicator();
     }
 }

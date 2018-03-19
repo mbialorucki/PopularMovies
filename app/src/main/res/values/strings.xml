@@ -7,4 +7,5 @@
     <string name="overview">Overview</string>
     <string name="release_date">Release date :</string>
     <string name="movie_load_error">Cannot load movie details. Try again.</string>
+    <string name="no_internet_connection">No internet connetion available!</string>
 </resources>

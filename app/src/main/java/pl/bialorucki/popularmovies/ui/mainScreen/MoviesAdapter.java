@@ -1,6 +1,5 @@
 package pl.bialorucki.popularmovies.ui.mainScreen;
 
-import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -10,13 +9,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
-
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import pl.bialorucki.popularmovies.R;
 import pl.bialorucki.popularmovies.Utils;
 import pl.bialorucki.popularmovies.model.Movie;
@@ -30,12 +26,14 @@ import pl.bialorucki.popularmovies.ui.helper.PicassoImageLoader;
 
 class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder> {
 
+    private final OnItemClickListener listener;
     private List<Movie> movies;
     private ImageLoader imageLoader;
 
-    public MoviesAdapter(List<Movie> movies) {
+    public MoviesAdapter(List<Movie> movies, OnItemClickListener listener) {
         this.movies = movies;
-        imageLoader = new PicassoImageLoader();
+        this.imageLoader = new PicassoImageLoader();
+        this.listener = listener;
     }
 
     public void setMovies(List<Movie> movies) {
@@ -46,21 +44,15 @@ class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder> {
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.movie_grid_item,parent,false);
+        View view = inflater.inflate(R.layout.movie_grid_item, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Movie movie = movies.get(position);
-        holder.movieTitle.setText(movie.getTitle());
-        holder.movieCard.setOnClickListener(view -> {
-            Intent intent = new Intent(holder.moviewPoster.getContext(), DetailActivity.class);
-            intent.putExtra("movie",movie);
-            holder.moviewPoster.getContext().startActivity(intent);
-        });
 
-        imageLoader.loadImage(holder.moviewPoster.getContext(),Utils.BASE_PATH + movies.get(position).getPoster_path(),holder.moviewPoster);
+        Movie movie = movies.get(position);
+        holder.bind(movie,listener);
 
     }
 
@@ -82,9 +74,17 @@ class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder> {
 
         public ViewHolder(View itemView) {
             super(itemView);
-            ButterKnife.bind(this,itemView);
+            ButterKnife.bind(this, itemView);
         }
 
+        public void bind(final Movie movie,final OnItemClickListener listener){
+            movieTitle.setText(movie.getTitle());
+            movieCard.setOnClickListener(view -> {
+              listener.onItemClick(movie);
+            });
+
+            imageLoader.loadImage(moviewPoster.getContext(), Utils.BASE_PATH + movie.getPoster_path(), moviewPoster);
+        }
 
     }
 }

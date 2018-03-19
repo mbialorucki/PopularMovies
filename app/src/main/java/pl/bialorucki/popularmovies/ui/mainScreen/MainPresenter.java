@@ -41,6 +41,13 @@ class MainPresenter extends BasePresenter<MainScreenContract.View> implements Ma
 
     }
 
+    @Override
+    public void checkInternetAccess(boolean internetAvailable) {
+        if(internetAvailable == false){
+            view.showNoNetworkConnectionInfo();
+        }
+    }
+
     private void loadMovies(Observable<MoviesList> movies) {
         view.showLoadingIndicator();
 
