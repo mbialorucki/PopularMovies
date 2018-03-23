@@ -7,13 +7,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
-
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import pl.bialorucki.popularmovies.R;
-import pl.bialorucki.popularmovies.Utils;
+import pl.bialorucki.popularmovies.utils.Utils;
 import pl.bialorucki.popularmovies.model.Movie;
 import pl.bialorucki.popularmovies.ui.helper.ImageLoader;
 import pl.bialorucki.popularmovies.ui.helper.PicassoImageLoader;
@@ -32,7 +30,7 @@ public class DetailActivity extends AppCompatActivity implements DetailScreenCon
     CollapsingToolbarLayout collapsingToolbarLayout;
     @BindView(R.id.cover_iv)
     ImageView coverImage;
-    @BindView(R.id.relase_date)
+    @BindView(R.id.release_date)
     TextView releaseDate;
     @BindView(R.id.avg_rating)
     TextView avgRating;
@@ -41,7 +39,6 @@ public class DetailActivity extends AppCompatActivity implements DetailScreenCon
     @BindView(R.id.number_of_votes)
     TextView numberOfVotes;
 
-    private Movie movieToDisplay;
     private DetailScreenContract.Presenter<DetailScreenContract.View> presenter;
     private ImageLoader imageLoader;
 
@@ -58,7 +55,7 @@ public class DetailActivity extends AppCompatActivity implements DetailScreenCon
         imageLoader = new PicassoImageLoader();
 
         if (getIntent().getExtras() != null) {
-            movieToDisplay = getIntent().getExtras().getParcelable(MOVIE_KEY);
+            Movie movieToDisplay = getIntent().getExtras().getParcelable(MOVIE_KEY);
             presenter.loadMovieDetails(movieToDisplay);
         }
     }

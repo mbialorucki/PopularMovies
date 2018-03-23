@@ -25,6 +25,7 @@
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <ImageView
+                android:contentDescription="@string/movie_header_image_descriptor"
                 android:id="@+id/header_iv"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -73,6 +74,7 @@
                     android:gravity="center">
 
                     <ImageView
+                        android:contentDescription="@string/movie_poster_image_descriptor"
                         android:id="@+id/cover_iv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -86,7 +88,7 @@
                         app:layout_constraintVertical_chainStyle="packed"/>
 
                     <TextView
-                        android:id="@+id/relase_date"
+                        android:id="@+id/release_date"
                         style="@style/TextViewWithDrawable"
                         android:drawableLeft="@drawable/ic_date_range_black_24dp"
                         app:layout_constraintBottom_toTopOf="@+id/original_language"
@@ -101,7 +103,7 @@
                         android:drawableLeft="@drawable/ic_language_black_24dp"
                         app:layout_constraintBottom_toTopOf="@+id/number_of_votes"
                         app:layout_constraintStart_toEndOf="@+id/cover_iv"
-                        app:layout_constraintTop_toBottomOf="@+id/relase_date"
+                        app:layout_constraintTop_toBottomOf="@+id/release_date"
                         tools:text="EN"/>
 
                     <TextView
@@ -120,7 +122,7 @@
                         android:textSize="50sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/relase_date"
+                        app:layout_constraintStart_toEndOf="@+id/release_date"
                         app:layout_constraintTop_toTopOf="parent"
                         tools:text="7.5"/>
                 </android.support.constraint.ConstraintLayout>

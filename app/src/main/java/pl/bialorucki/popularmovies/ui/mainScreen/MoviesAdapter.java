@@ -1,6 +1,5 @@
 package pl.bialorucki.popularmovies.ui.mainScreen;
 
-import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,9 +13,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import pl.bialorucki.popularmovies.R;
-import pl.bialorucki.popularmovies.Utils;
+import pl.bialorucki.popularmovies.utils.Utils;
 import pl.bialorucki.popularmovies.model.Movie;
-import pl.bialorucki.popularmovies.ui.detailScreen.DetailActivity;
 import pl.bialorucki.popularmovies.ui.helper.ImageLoader;
 import pl.bialorucki.popularmovies.ui.helper.PicassoImageLoader;
 
@@ -79,9 +77,7 @@ class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder> {
 
         public void bind(final Movie movie,final OnItemClickListener listener){
             movieTitle.setText(movie.getTitle());
-            movieCard.setOnClickListener(view -> {
-              listener.onItemClick(movie);
-            });
+            movieCard.setOnClickListener(view -> listener.onItemClick(movie));
 
             imageLoader.loadImage(moviewPoster.getContext(), Utils.BASE_PATH + movie.getPoster_path(), moviewPoster);
         }

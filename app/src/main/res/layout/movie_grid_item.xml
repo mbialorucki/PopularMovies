@@ -15,6 +15,7 @@
         android:layout_height="wrap_content">
 
         <ImageView
+            android:contentDescription="@string/movie_poster_image_descriptor"
             android:id="@+id/poster_iv"
             android:layout_width="0dp"
             android:layout_height="0dp"

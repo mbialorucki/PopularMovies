@@ -4,7 +4,7 @@ import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import pl.bialorucki.popularmovies.BuildConfig;
-import pl.bialorucki.popularmovies.Utils;
+import pl.bialorucki.popularmovies.utils.Utils;
 import pl.bialorucki.popularmovies.model.MoviesList;
 import pl.bialorucki.popularmovies.service.retrofit.RetrofitHelper;
 import pl.bialorucki.popularmovies.ui.base.BasePresenter;
@@ -43,7 +43,7 @@ class MainPresenter extends BasePresenter<MainScreenContract.View> implements Ma
 
     @Override
     public void checkInternetAccess(boolean internetAvailable) {
-        if(internetAvailable == false){
+        if(!internetAvailable){
             view.showNoNetworkConnectionInfo();
         }
     }

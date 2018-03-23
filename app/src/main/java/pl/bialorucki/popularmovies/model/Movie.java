@@ -3,8 +3,7 @@ package pl.bialorucki.popularmovies.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.google.gson.Gson;
-import com.google.gson.TypeAdapter;
+import java.util.Arrays;
 
 /**
  * Created by Maciej Bialorucki on 05.03.18.
@@ -182,9 +181,23 @@ public  class Movie implements Parcelable {
 
     @Override
     public String toString() {
-        return super.toString();
+        return "Movie{" +
+                "vote_average='" + vote_average + '\'' +
+                ", backdrop_path='" + backdrop_path + '\'' +
+                ", adult='" + adult + '\'' +
+                ", id='" + id + '\'' +
+                ", title='" + title + '\'' +
+                ", overview='" + overview + '\'' +
+                ", original_language='" + original_language + '\'' +
+                ", genre_ids=" + Arrays.toString(genre_ids) +
+                ", release_date='" + release_date + '\'' +
+                ", original_title='" + original_title + '\'' +
+                ", vote_count='" + vote_count + '\'' +
+                ", poster_path='" + poster_path + '\'' +
+                ", video='" + video + '\'' +
+                ", popularity='" + popularity + '\'' +
+                '}';
     }
-
 
     @Override
     public int describeContents() {

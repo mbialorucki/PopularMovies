@@ -1,4 +1,4 @@
-package pl.bialorucki.popularmovies;
+package pl.bialorucki.popularmovies.utils;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -15,6 +15,7 @@ public class AndroidUtils {
     public AndroidUtils(Context context){
         this.context = context;
     }
+
     public boolean isInternetAvailable(){
         ConnectivityManager connectivityManager = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();

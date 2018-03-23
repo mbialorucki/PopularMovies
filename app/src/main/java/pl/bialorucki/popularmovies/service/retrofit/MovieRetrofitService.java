@@ -2,12 +2,8 @@ package pl.bialorucki.popularmovies.service.retrofit;
 
 import io.reactivex.Observable;
 import pl.bialorucki.popularmovies.model.*;
-import java.util.List;
 
-import pl.bialorucki.popularmovies.BuildConfig;
-import retrofit2.Call;
 import retrofit2.http.GET;
-import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 /**

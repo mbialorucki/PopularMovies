@@ -17,9 +17,9 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import pl.bialorucki.popularmovies.AndroidUtils;
+import pl.bialorucki.popularmovies.utils.AndroidUtils;
 import pl.bialorucki.popularmovies.R;
-import pl.bialorucki.popularmovies.Utils;
+import pl.bialorucki.popularmovies.utils.Utils;
 import pl.bialorucki.popularmovies.model.Movie;
 import pl.bialorucki.popularmovies.ui.detailScreen.DetailActivity;
 

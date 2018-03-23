@@ -5,8 +5,6 @@ import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
 
-import pl.bialorucki.popularmovies.Utils;
-
 /**
  * Created by Maciej Bialorucki on 16.03.18.
  */

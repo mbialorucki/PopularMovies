@@ -1,13 +1,12 @@
 package pl.bialorucki.popularmovies.ui.detailScreen;
 
 import pl.bialorucki.popularmovies.model.*;
-import org.junit.BeforeClass;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
 /**
@@ -17,7 +16,7 @@ import static org.mockito.Mockito.verify;
 public class DetailsPresenterTest {
 
     @Mock
-    public DetailScreenContract.View mockView;// = mock(DetailScreenContract.View.class);
+    private DetailScreenContract.View mockView;// = mock(DetailScreenContract.View.class);
 
 
     @Test
