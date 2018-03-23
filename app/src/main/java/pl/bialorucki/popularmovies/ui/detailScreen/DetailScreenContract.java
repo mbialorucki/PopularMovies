@@ -8,7 +8,7 @@ import pl.bialorucki.popularmovies.ui.base.MvpView;
  * Created by Maciej Bialorucki on 06.03.18.
  */
 
-public class DetailScreenContract {
+public interface DetailScreenContract {
 
     interface View extends MvpView {
         void showMovieDetails(Movie movie);

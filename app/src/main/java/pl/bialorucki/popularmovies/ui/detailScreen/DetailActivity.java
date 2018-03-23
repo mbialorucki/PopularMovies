@@ -81,4 +81,10 @@ public class DetailActivity extends AppCompatActivity implements DetailScreenCon
     public void showError() {
         Snackbar.make(collapsingToolbarLayout,R.string.movie_load_error,Snackbar.LENGTH_INDEFINITE).show();
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        presenter.detachView();
+    }
 }
