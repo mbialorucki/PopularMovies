@@ -4,6 +4,7 @@ import io.reactivex.Observable;
 import pl.bialorucki.popularmovies.model.*;
 
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 /**
