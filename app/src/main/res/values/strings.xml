@@ -8,4 +8,6 @@
     <string name="no_internet_connection">No internet connection available!</string>
     <string name="movie_header_image_descriptor">Movie image</string>
     <string name="movie_poster_image_descriptor">Movie poster</string>
+    <string name="trailers">Trailers</string>
+    <string name="favourite_menu_item">Show favourite</string>
 </resources>
