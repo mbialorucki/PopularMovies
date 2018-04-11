@@ -57,4 +57,8 @@ class MainPresenter extends BasePresenter<MainScreenContract.View> implements Ma
                 .subscribe(moviesList -> view.showMovies(moviesList.getMovies()));
     }
 
+    @Override
+    public void loadFavouriteMovies() {
+
+    }
 }

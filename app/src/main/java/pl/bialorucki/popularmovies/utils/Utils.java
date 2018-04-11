@@ -11,4 +11,5 @@ public class Utils {
     public static final String SORTING_STRATEGY = "sorting_strategy";
     public static final String MOST_POPULAR_STRATEGY = "most_popular";
     public static final String HIGHEST_RATED_STRATEGY = "highest_rated";
+    public static final String FAVOURITE_STRATEGY = "favourites";
 }

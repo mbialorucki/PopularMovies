@@ -14,4 +14,9 @@
         app:showAsAction="never"
         />
 
+    <item
+        android:id="@+id/show_favourite"
+        android:title="@string/favourite_menu_item"
+        app:showAsAction="never"/>
+
 </menu>

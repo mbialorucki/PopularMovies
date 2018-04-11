@@ -104,6 +104,11 @@ public class MainActivity extends AppCompatActivity implements MainScreenContrac
                     sortingStrategy = Utils.HIGHEST_RATED_STRATEGY;
                 }
                 return true;
+            case R.id.show_favourite:
+                if(androidUtils.isInternetAvailable()){
+                    presenter.loadFavouriteMovies();
+                    sortingStrategy = Utils.FAVOURITE_STRATEGY;
+                }
             default:
                 return super.onOptionsItemSelected(item);
         }

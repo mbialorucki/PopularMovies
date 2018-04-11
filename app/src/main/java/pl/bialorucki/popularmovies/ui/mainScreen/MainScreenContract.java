@@ -28,6 +28,7 @@ interface MainScreenContract {
         void loadMostPopularMovies();
         void loadHighestRatedMovies();
         void loadLastSelectedMovies(String sortingType);
+        void loadFavouriteMovies();
         void checkInternetAccess(boolean internetAvailable);
     }
 }
