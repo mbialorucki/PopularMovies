@@ -96,19 +96,19 @@ public class MainActivity extends AppCompatActivity implements MainScreenContrac
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.show_most_popular:
-                if(androidUtils.isInternetAvailable()) {
+                if (androidUtils.isInternetAvailable()) {
                     presenter.loadMostPopularMovies();
                     sortingStrategy = Utils.MOST_POPULAR_STRATEGY;
                 }
                 return true;
             case R.id.show_highest_rated:
-                if(androidUtils.isInternetAvailable()) {
+                if (androidUtils.isInternetAvailable()) {
                     presenter.loadHighestRatedMovies();
                     sortingStrategy = Utils.HIGHEST_RATED_STRATEGY;
                 }
                 return true;
             case R.id.show_favourite:
-                if(androidUtils.isInternetAvailable()){
+                if (androidUtils.isInternetAvailable()) {
                     presenter.loadFavouriteMovies();
                     sortingStrategy = Utils.FAVOURITE_STRATEGY;
                 }

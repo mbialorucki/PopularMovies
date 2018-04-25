@@ -1,6 +1,7 @@
 package pl.bialorucki.popularmovies.ui.detailScreen;
 
 import pl.bialorucki.popularmovies.model.Movie;
+import pl.bialorucki.popularmovies.model.ReviewsList;
 import pl.bialorucki.popularmovies.model.TrailerList;
 import pl.bialorucki.popularmovies.ui.base.MvpPresenter;
 import pl.bialorucki.popularmovies.ui.base.MvpView;

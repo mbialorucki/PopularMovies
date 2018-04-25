@@ -19,5 +19,6 @@ public interface MovieRetrofitService {
     Observable<MoviesList> getMoviesByRating(@Query("api_key") String apiKey);
     @GET("movie/{id}/videos")
     Observable<TrailerList> getMovieTrailers(@Path("id") String movieId,@Query("api_key") String apiKey);
-
+    @GET("movie/{id}/reviews")
+    Observable<ReviewsList> getMovieReviews(@Path("id") String movieId, @Query("api_key") String apiKey);
 }

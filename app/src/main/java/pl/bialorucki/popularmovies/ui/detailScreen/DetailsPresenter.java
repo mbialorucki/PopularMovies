@@ -5,7 +5,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import pl.bialorucki.popularmovies.BuildConfig;
 import pl.bialorucki.popularmovies.model.Movie;
-import pl.bialorucki.popularmovies.model.MoviesList;
+import pl.bialorucki.popularmovies.model.ReviewsList;
 import pl.bialorucki.popularmovies.model.TrailerList;
 import pl.bialorucki.popularmovies.service.retrofit.RetrofitHelper;
 import pl.bialorucki.popularmovies.ui.base.BasePresenter;

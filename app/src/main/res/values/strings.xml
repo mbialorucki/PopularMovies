@@ -10,4 +10,7 @@
     <string name="movie_poster_image_descriptor">Movie poster</string>
     <string name="trailers">Trailers</string>
     <string name="favourite_menu_item">Show favourite</string>
+    <string name="reviews">Reviews</string>
+    <string name="author">Author</string>
+    <string name="no_reviews_available">Reviews list is empty :(</string>
 </resources>

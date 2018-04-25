@@ -12,4 +12,6 @@ public class Utils {
     public static final String MOST_POPULAR_STRATEGY = "most_popular";
     public static final String HIGHEST_RATED_STRATEGY = "highest_rated";
     public static final String FAVOURITE_STRATEGY = "favourites";
+
+    public static final String YOUTUBE_URL = "https://www.youtube.com/watch?v=";
 }
