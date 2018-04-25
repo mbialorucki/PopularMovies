@@ -122,22 +122,51 @@ public class DetailActivity extends AppCompatActivity implements DetailScreenCon
         presenter.loadMovieTrailers(movieToDisplay.getId());
     }
 
-    @Override
-    public void showTrailers(TrailerList trailers) {
-        int i = 1;
-        for (Trailer trailer:
-             trailers.getTrailers()) {
-            TextView child = new TextView(this);
-            child.setText(String.valueOf(i));
-            trailersList.addView(child);
-            i++;
-        }
-        Log.d("Trailer  s : ", String.valueOf(trailers.getTrailers().size()));
-    }
+
 
     @Override
     public void showError() {
-        Snackbar.make(collapsingToolbarLayout,R.string.movie_load_error,Snackbar.LENGTH_INDEFINITE).show();
+        Snackbar.make(collapsingToolbarLayout, R.string.movie_load_error, Snackbar.LENGTH_INDEFINITE).show();
+    }
+
+    @Override
+    public void showTrailers(TrailerList trailers) {
+        trailersList.setVisibility(View.VISIBLE);
+        trailersAdapter.setTrailers(trailers);
+        trailersAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void showReviews(ReviewsList reviews) {
+        reviewsList.setVisibility(View.VISIBLE);
+        reviewsAdapter.setReviews(reviews.getReviews());
+        reviewsAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void showNoTrailers() {
+        emptyTrailersList.setVisibility(View.VISIBLE);
+        trailersList.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showNoReviews() {
+        emptyReviewsList.setVisibility(View.VISIBLE);
+        reviewsList.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void changeFavouriteButtonOff() {
+        movieToDisplay.setFavourite(false);
+        client.unmadeMovieFavourite(movieToDisplay);
+        favouriteButton.setImageDrawable(getDrawable(android.R.drawable.star_big_off));
+    }
+
+    @Override
+    public void changeFavouriteButtonOn() {
+        movieToDisplay.setFavourite(true);
+        client.makeMovieFavourite(movieToDisplay);
+        favouriteButton.setImageDrawable(getDrawable(android.R.drawable.star_big_on));
     }
 
     @Override

@@ -27,10 +27,42 @@ public class DetailsPresenter extends BasePresenter<DetailScreenContract.View> i
 
     @Override
     public void loadMovieTrailers(String id) {
-        Observable<TrailerList> moviesByRating = RetrofitHelper.createRetrofitMoviesClient().getMovieTrailers(id,BuildConfig.API_KEY);
-        moviesByRating.subscribeOn(Schedulers.newThread())
+        Observable<TrailerList> trailers = RetrofitHelper.createRetrofitMoviesClient().getMovieTrailers(id, BuildConfig.API_KEY);
+        trailers.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 //.doOnComplete(() -> view.hideLoadingIndicator())
-                .subscribe(trailersList -> view.showTrailers(trailersList));
+                .subscribe(trailersList -> {
+                    if (trailersList.getTrailers().size() == 0) {
+                        view.showNoTrailers();
+                    } else {
+                        view.showTrailers(trailersList);
+                    }
+                });
+    }
+
+    @Override
+    public void loadMovieReviews(String id) {
+        Observable<ReviewsList> reviews = RetrofitHelper.createRetrofitMoviesClient().getMovieReviews(id, BuildConfig.API_KEY);
+        reviews.subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(reviewsList -> {
+                    if (reviewsList.getReviews().size() == 0) {
+                        view.showNoReviews();
+                    } else {
+                        view.showReviews(reviewsList);
+                    }
+                });
+    }
+
+    @Override
+    public void changeMovieFavouriteState(Movie movieToDisplay) {
+        if (movieToDisplay == null)
+            return;
+
+        if (movieToDisplay.isFavourite()) {
+            view.changeFavouriteButtonOff();
+        } else {
+            view.changeFavouriteButtonOn();
+        }
     }
 }

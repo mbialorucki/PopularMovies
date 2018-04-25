@@ -16,11 +16,22 @@ public interface DetailScreenContract {
         void showMovieDetails(Movie movie);
         void showTrailers(TrailerList trailers);
         void showError();
+
+        void showReviews(ReviewsList reviewsList);
+
+        void showNoTrailers();
+        void showNoReviews();
+
+        void changeFavouriteButtonOff();
+
+        void changeFavouriteButtonOn();
     }
 
     interface Presenter<V extends MvpView> extends MvpPresenter<V> {
         void loadMovieDetails(Movie movie);
         void loadMovieTrailers(String id);
         void loadMovieReviews(String id);
+
+        void changeMovieFavouriteState(Movie movieToDisplay);
     }
 }

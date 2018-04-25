@@ -46,6 +46,9 @@ class MainPresenter extends BasePresenter<MainScreenContract.View> implements Ma
             case Utils.HIGHEST_RATED_STRATEGY:
                 loadHighestRatedMovies();
                 break;
+            case Utils.FAVOURITE_STRATEGY:
+                loadFavouriteMovies();
+                break;
         }
 
     }

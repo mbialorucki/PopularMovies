@@ -62,15 +62,19 @@ public class MainActivity extends AppCompatActivity implements MainScreenContrac
 
         if (internetAvailable) {
             if (savedInstanceState != null) {
-                String lastSortingStrategy = savedInstanceState.getString(Utils.SORTING_STRATEGY, Utils.MOST_POPULAR_STRATEGY);
-                presenter.loadLastSelectedMovies(lastSortingStrategy);
+                sortingStrategy = savedInstanceState.getString(Utils.SORTING_STRATEGY, Utils.MOST_POPULAR_STRATEGY);
             } else {
-                presenter.loadMostPopularMovies();
+                sortingStrategy = Utils.MOST_POPULAR_STRATEGY;
             }
         }
 
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        presenter.loadLastSelectedMovies(sortingStrategy);
+    }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
