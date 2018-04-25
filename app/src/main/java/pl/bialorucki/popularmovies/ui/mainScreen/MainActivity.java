@@ -17,11 +17,14 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import pl.bialorucki.popularmovies.utils.AndroidUtils;
 import pl.bialorucki.popularmovies.R;
-import pl.bialorucki.popularmovies.utils.Utils;
+import pl.bialorucki.popularmovies.data.db.FavouriteMoviesDbHelper;
+import pl.bialorucki.popularmovies.data.db.FavouriteMoviesRepository;
+import pl.bialorucki.popularmovies.data.db.SQLiteRepository;
 import pl.bialorucki.popularmovies.model.Movie;
 import pl.bialorucki.popularmovies.ui.detailScreen.DetailActivity;
+import pl.bialorucki.popularmovies.utils.AndroidUtils;
+import pl.bialorucki.popularmovies.utils.Utils;
 
 public class MainActivity extends AppCompatActivity implements MainScreenContract.View {
 
@@ -49,8 +52,8 @@ public class MainActivity extends AppCompatActivity implements MainScreenContrac
 
         configureRecycleView();
 
-
-        presenter = new MainPresenter();
+        FavouriteMoviesRepository moviesRepository = new SQLiteRepository(new FavouriteMoviesDbHelper(this));
+        presenter = new MainPresenter(moviesRepository);
         presenter.attachView(this);
 
         androidUtils = new AndroidUtils(this);

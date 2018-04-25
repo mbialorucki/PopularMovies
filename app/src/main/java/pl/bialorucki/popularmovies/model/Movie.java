@@ -38,6 +38,7 @@ public  class Movie implements Parcelable {
     private String video;
 
     private String popularity;
+    private boolean favourite;
 
     public String getVote_average ()
     {
@@ -253,4 +254,12 @@ public  class Movie implements Parcelable {
             return new Movie[size];
         }
     };
+
+    public boolean isFavourite() {
+        return favourite;
+    }
+
+    public void setFavourite(boolean favourite) {
+        this.favourite = favourite;
+    }
 }

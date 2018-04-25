@@ -26,6 +26,12 @@
             android:label="@string/title_activity_detail"
             android:theme="@style/AppTheme">
         </activity>
+
+        <provider
+            android:authorities="pl.bialorucki.popularmovies"
+            android:exported="false"
+            android:name=".data.contentProvider.PopularMoviesContentProvider"/>
+
     </application>
 
 </manifest>
