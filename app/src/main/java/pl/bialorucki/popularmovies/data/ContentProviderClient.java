@@ -25,7 +25,7 @@ public class ContentProviderClient {
     }
 
     public boolean isFavourite(Movie movie){
-        Cursor query = context.getContentResolver().query(PopularMoviesContentProvider.CONTENT_URI, null, FavouriteMoviesContract.FavoriteEntry.COLUMN_NAME_ID + movie.getId(), null, null);
+        Cursor query = context.getContentResolver().query(PopularMoviesContentProvider.CONTENT_URI, null, FavouriteMoviesContract.FavoriteEntry.COLUMN_NAME_ID +"="+ movie.getId(), null, null);
         return query.getCount() != 0;
 
     }

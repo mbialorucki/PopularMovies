@@ -27,7 +27,7 @@ public class DetailsPresenter extends BasePresenter<DetailScreenContract.View> i
 
     @Override
     public void loadMovieTrailers(String id) {
-        Observable<TrailerList> trailers = RetrofitHelper.createRetrofitMoviesClient().getMovieTrailers(id, BuildConfig.API_KEY);
+        Observable<TrailerList> trailers = RetrofitHelper.createRetrofitMoviesClient().getMovieTrailers(id);
         trailers.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(trailersList -> {
@@ -41,7 +41,7 @@ public class DetailsPresenter extends BasePresenter<DetailScreenContract.View> i
 
     @Override
     public void loadMovieReviews(String id) {
-        Observable<ReviewsList> reviews = RetrofitHelper.createRetrofitMoviesClient().getMovieReviews(id, BuildConfig.API_KEY);
+        Observable<ReviewsList> reviews = RetrofitHelper.createRetrofitMoviesClient().getMovieReviews(id);
         reviews.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(reviewsList -> {

@@ -26,13 +26,13 @@ class MainPresenter extends BasePresenter<MainScreenContract.View> implements Ma
 
     @Override
     public void loadMostPopularMovies() {
-        Observable<MoviesList> movies = RetrofitHelper.createRetrofitMoviesClient().getMovies("popular",BuildConfig.API_KEY);
+        Observable<MoviesList> movies = RetrofitHelper.createRetrofitMoviesClient().getMovies("popular");
         loadMovies(movies);
     }
 
     @Override
     public void loadHighestRatedMovies() {
-        Observable<MoviesList> moviesByRating = RetrofitHelper.createRetrofitMoviesClient().getMovies("top_rated",BuildConfig.API_KEY);
+        Observable<MoviesList> moviesByRating = RetrofitHelper.createRetrofitMoviesClient().getMovies("top_rated");
         loadMovies(moviesByRating);
     }
 
