@@ -38,6 +38,7 @@ class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder> {
         this.movies = movies;
     }
 
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
@@ -79,6 +80,8 @@ class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder> {
 
             imageLoader.loadImage(moviewPoster.getContext(), Utils.BASE_PATH + movie.getPoster_path(), moviewPoster);
         }
+
+
 
     }
 }

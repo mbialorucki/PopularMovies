@@ -3,6 +3,8 @@ package pl.bialorucki.popularmovies.ui.mainScreen;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Parcelable;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
@@ -39,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements MainScreenContrac
     private MainScreenContract.Presenter<MainScreenContract.View> presenter;
     private String sortingStrategy;
     private AndroidUtils androidUtils;
+    private Parcelable recycleViewOldState;
 
 
     @Override
@@ -63,26 +66,24 @@ public class MainActivity extends AppCompatActivity implements MainScreenContrac
         presenter.checkInternetAccess(internetAvailable);
 
         if (internetAvailable) {
+
+            presenter.loadLastSelectedMovies(sortingStrategy);
+
             if (savedInstanceState != null) {
-                sortingStrategy = savedInstanceState.getString(Utils.SORTING_STRATEGY, Utils.MOST_POPULAR_STRATEGY);
-            } else {
-                sortingStrategy = Utils.MOST_POPULAR_STRATEGY;
+                recycleViewOldState = savedInstanceState.getParcelable(Utils.RECYCLE_VIEW_POSITION_KEY);
             }
         }
 
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        presenter.loadLastSelectedMovies(sortingStrategy);
-    }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
         outState.putString(Utils.SORTING_STRATEGY, sortingStrategy);
+        outState.putParcelable(Utils.RECYCLE_VIEW_POSITION_KEY,mainGrid.getLayoutManager().onSaveInstanceState());
         super.onSaveInstanceState(outState);
     }
+
 
 
     @Override
@@ -157,6 +158,9 @@ public class MainActivity extends AppCompatActivity implements MainScreenContrac
     @Override
     public void hideLoadingIndicator() {
         mainProgressBar.setVisibility(View.GONE);
+        if(recycleViewOldState != null){
+            mainGrid.getLayoutManager().onRestoreInstanceState(recycleViewOldState);
+        }
     }
 
     @Override

@@ -14,4 +14,5 @@ public class Utils {
     public static final String FAVOURITE_STRATEGY = "favourites";
 
     public static final String YOUTUBE_URL = "https://www.youtube.com/watch?v=";
+    public static final String RECYCLE_VIEW_POSITION_KEY = "position";
 }
