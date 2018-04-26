@@ -98,7 +98,6 @@ public class DetailActivity extends AppCompatActivity implements DetailScreenCon
             favouriteButton.setImageDrawable(getDrawable(android.R.drawable.star_big_on));
         }else{
             favouriteButton.setImageDrawable(getDrawable(android.R.drawable.star_big_off));
-
         }
     }
 
@@ -121,8 +120,6 @@ public class DetailActivity extends AppCompatActivity implements DetailScreenCon
         numberOfVotes.setText(movieToDisplay.getVote_count());
         presenter.loadMovieTrailers(movieToDisplay.getId());
     }
-
-
 
     @Override
     public void showError() {

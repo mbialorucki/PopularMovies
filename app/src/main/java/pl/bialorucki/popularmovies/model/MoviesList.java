@@ -17,7 +17,4 @@ public class MoviesList {
         return movies;
     }
 
-    public void setMovies(List<Movie> movies) {
-        this.movies = movies;
-    }
 }

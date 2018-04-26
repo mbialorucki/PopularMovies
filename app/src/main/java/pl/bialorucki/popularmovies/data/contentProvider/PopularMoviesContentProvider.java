@@ -29,7 +29,6 @@ public class PopularMoviesContentProvider extends ContentProvider {
 
     public static final Uri CONTENT_URI = BASE_CONTENT_URI.buildUpon().appendPath(PATH_MOVIES).build();
 
-
     private static final UriMatcher matcher = new UriMatcher(UriMatcher.NO_MATCH);
 
     static {

@@ -30,7 +30,6 @@ public class DetailsPresenter extends BasePresenter<DetailScreenContract.View> i
         Observable<TrailerList> trailers = RetrofitHelper.createRetrofitMoviesClient().getMovieTrailers(id, BuildConfig.API_KEY);
         trailers.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                //.doOnComplete(() -> view.hideLoadingIndicator())
                 .subscribe(trailersList -> {
                     if (trailersList.getTrailers().size() == 0) {
                         view.showNoTrailers();

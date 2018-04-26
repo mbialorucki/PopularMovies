@@ -18,7 +18,7 @@ public class FavouriteMoviesContract {
         public static final String COLUMN_NAME_DESCRIPTION = "description";
         public static final String COLUMN_NAME_RELEASE_DATE = "releaseDate";
         public static final String COLUMN_NAME_AVG_RATING = "avgRating";
-        public static final String COLUMN_NAME_ORIGINAL_LANGUAGE = "oryginalLanguage";
+        public static final String COLUMN_NAME_ORIGINAL_LANGUAGE = "originalLanguage";
         public static final String COLUMN_NAME_NUMBER_OF_VOTES = "numberOfVotes";
         public static final String COLUMN_NAME_FAVOURITE = "favourite";
     }

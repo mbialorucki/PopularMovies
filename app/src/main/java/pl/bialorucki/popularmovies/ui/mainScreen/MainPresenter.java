@@ -50,7 +50,6 @@ class MainPresenter extends BasePresenter<MainScreenContract.View> implements Ma
                 loadFavouriteMovies();
                 break;
         }
-
     }
 
     @Override

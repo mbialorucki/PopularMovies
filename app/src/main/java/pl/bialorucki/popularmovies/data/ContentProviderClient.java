@@ -25,7 +25,7 @@ public class ContentProviderClient {
     }
 
     public boolean isFavourite(Movie movie){
-        Cursor query = context.getContentResolver().query(PopularMoviesContentProvider.CONTENT_URI, null, "movieId=" + movie.getId(), null, null);
+        Cursor query = context.getContentResolver().query(PopularMoviesContentProvider.CONTENT_URI, null, FavouriteMoviesContract.FavoriteEntry.COLUMN_NAME_ID + movie.getId(), null, null);
         return query.getCount() != 0;
 
     }
@@ -46,7 +46,7 @@ public class ContentProviderClient {
     }
 
     public void unmadeMovieFavourite(Movie movie){
-        context.getContentResolver().delete(PopularMoviesContentProvider.CONTENT_URI,"movieId="+movie.getId(),null);
+        context.getContentResolver().delete(PopularMoviesContentProvider.CONTENT_URI,FavouriteMoviesContract.FavoriteEntry.COLUMN_NAME_ID+"="+movie.getId(),null);
     }
 
     public List<Movie> getAll(){
@@ -71,7 +71,7 @@ public class ContentProviderClient {
             String description = query.getString(descriptionIndex);
             String releaseDate = query.getString(releaseDateIndex);
             String avgRating = query.getString(avgRatingIndex);
-            String oryginalLanguage = query.getString(oryginalLanguageIndex);
+            String originalLanguage = query.getString(oryginalLanguageIndex);
             String numberOfVotes = query.getString(numberOfVotesIndex);
             int favorite = query.getInt(favoriteIndex);
 
@@ -83,7 +83,7 @@ public class ContentProviderClient {
             movie.setOverview(description);
             movie.setRelease_date(releaseDate);
             movie.setVote_average(avgRating);
-            movie.setOriginal_language(oryginalLanguage);
+            movie.setOriginal_language(originalLanguage);
             movie.setVote_count(numberOfVotes);
             movie.setFavourite(favorite == 1);
 

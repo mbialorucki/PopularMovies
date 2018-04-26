@@ -14,21 +14,17 @@ public class FavouriteMoviesDbHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "waitlist.db";
     private static final int DATABASE_VERSION = 3;
-    private Context context;
 
     public FavouriteMoviesDbHelper(Context context) {
         this(context, DATABASE_NAME, null, DATABASE_VERSION);
-        this.context = context;
     }
 
     public FavouriteMoviesDbHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
-        this.context = context;
     }
 
     public FavouriteMoviesDbHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version, DatabaseErrorHandler errorHandler) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION, errorHandler);
-        this.context = context;
     }
 
     @Override
