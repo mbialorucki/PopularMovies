@@ -1,11 +1,13 @@
 package pl.bialorucki.popularmovies.ui.mainScreen;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -122,13 +124,23 @@ public class MainActivity extends AppCompatActivity implements MainScreenContrac
     }
 
     private void configureRecycleView() {
-        mainGrid.setLayoutManager(new GridLayoutManager(this, 2));
+        mainGrid.setLayoutManager(new GridLayoutManager(this, calculateNoOfColumns(this)));
         gridAdapter = new MoviesAdapter(Collections.EMPTY_LIST, movie -> {
             Intent intent = new Intent(MainActivity.this, DetailActivity.class);
             intent.putExtra("movie", movie);
             startActivity(intent);
         });
         mainGrid.setAdapter(gridAdapter);
+    }
+
+    private static int calculateNoOfColumns(Context context) {
+        DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
+        float dpWidth = displayMetrics.widthPixels / displayMetrics.density;
+        int scalingFactor = 180;
+        int noOfColumns = (int) (dpWidth / scalingFactor);
+        if(noOfColumns < 2)
+            noOfColumns = 2;
+        return noOfColumns;
     }
 
     @Override
