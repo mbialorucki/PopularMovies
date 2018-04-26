@@ -13,10 +13,9 @@ import retrofit2.http.Query;
 
 public interface MovieRetrofitService {
 
-    @GET("movie/popular")
-    Observable<MoviesList> getMoviesByPopularity(@Query("api_key") String apiKey);
-    @GET("movie/top_rated")
-    Observable<MoviesList> getMoviesByRating(@Query("api_key") String apiKey);
+    @GET("movie/{sort_by}")
+    Observable<MoviesList> getMovies(@Path("sort_by") String soryBy, @Query("api_key") String apiKey);
+
     @GET("movie/{id}/videos")
     Observable<TrailerList> getMovieTrailers(@Path("id") String movieId,@Query("api_key") String apiKey);
     @GET("movie/{id}/reviews")
